@@ -3,7 +3,7 @@
 #
 # Linear student-teacher model 
 #
-# with weight regularization
+# with weight regularization (in Euclidean metric)
 #
 
 import sys
@@ -13,7 +13,7 @@ import jax.numpy as jnp
 from jax import grad, jit, vmap
 from jax import random
 
-from tlcf1_lst2_model import generate_tasks, calc_dW_wn, fnorm2
+from lst_model import generate_tasks, calc_dW_wn, fnorm2
 
 
 def run_exp(params):
