@@ -266,5 +266,4 @@ if __name__ == "__main__":
 	#plot_simul_set1(params)
 	plot_simul_set2(params)
 	#plot_simul_set3(params)
-	#plot_simul_set4(params)
 		
