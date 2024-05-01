@@ -1,7 +1,9 @@
 #
 # Model of tranfer learning and catastrophic forgetting
 #
-# Linear student-teacher model with context-dependent gating of synaptic plasticity
+# Linear student-teacher model
+#
+# Illustrating the analytical results on the vanilla model
 #
 
 import sys
