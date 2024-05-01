@@ -3,7 +3,7 @@
 #
 # Linear student-teacher model
 #
-# Vanilla model
+# A model with weight regularization in the Euclidean metric
 #
 
 import sys
