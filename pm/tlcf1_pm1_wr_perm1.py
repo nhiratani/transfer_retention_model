@@ -1,9 +1,7 @@
 #
 # Model of tranfer learning and catastrophic forgetting
 #
-# Fashion MNIST Dataset
-#
-# Permutation of input and output
+# Permuted MNIST Dataset
 #
 # A model with weight regularization
 #
@@ -15,8 +13,8 @@ import jax.numpy as jnp
 from jax import grad, jit, vmap
 from jax import random
 
-from tlcf1_pm1_model import init_network_params, copy_params_value, loss, update_wr_euc, update_wr_diag, update_wr_fim, calc_coeff_params_diag, calc_coeff_params_fim
-from tlcf1_pm1_data import load_mnist_data, generate_tasks_xperm, generate_Bs, generate_B3s
+from pm_model import init_network_params, copy_params_value, loss, update_wr_euc, update_wr_diag, update_wr_fim, calc_coeff_params_diag, calc_coeff_params_fim
+from pm_data import load_mnist_data, generate_tasks_xperm, generate_Bs, generate_B3s
 
 import matplotlib.pyplot as plt
 
