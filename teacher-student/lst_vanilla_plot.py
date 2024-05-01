@@ -3,7 +3,7 @@
 #
 # Linear student-teacher model
 #
-# Vanilla model
+# Vanilla model, plotting
 #
 
 import sys
@@ -29,7 +29,7 @@ def calc_eTF_eRT_vanilla_mf(params):
 	return eTF, eRT
 
 
-
+# Plot transfer and retention performance as a function of task similarity
 def plot_simul_set1(params):
 	rhoAs = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
 	
