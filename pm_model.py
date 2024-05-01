@@ -1,7 +1,7 @@
 #
 # Model of tranfer learning and catastrophic forgetting
 #
-# Fashion MNIST Dataset
+# purmuted MNIST Dataset
 #
 
 import sys
