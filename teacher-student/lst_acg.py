@@ -77,7 +77,7 @@ def run_exp(params):
 
 
 def simul(params):
-	fstr = 'data/tlcf_lst_acg_errors_Nx' + str(params['Nx']) + '_lr' + str(params['learning_rate'])\
+	fstr = 'data/tlcf1_lst2_acg_errors_Nx' + str(params['Nx']) + '_lr' + str(params['learning_rate'])\
 	 + '_nep' + str(params['num_epochs']) + '_rhoA' + str(params['rhoA']) + '_rhoB' + str(params['rhoB']) + '_alpha' + str(params['alpha']) + '_ikm' + str(params['ikmax']) + ".txt"
 	fw = open(fstr, 'w')
 
