@@ -2,7 +2,8 @@
 # Model of tranfer learning and catastrophic forgetting
 #
 # Linear student-teacher model
-# with context-dependent gating of synaptic plasticity
+# 
+# Data generation and weight update functions
 #
 
 import sys
