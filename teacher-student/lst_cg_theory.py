@@ -20,7 +20,6 @@ for cidx in range(cnum):
 	clrs.append( cm.rainbow( (0.5+cidx)/cnum ) )
 
 
-
 def diagram1():
 	drhoA = 0.02; 
 	drhoB = 0.02
