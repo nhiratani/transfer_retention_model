@@ -1,9 +1,7 @@
 #
 # Model of tranfer learning and catastrophic forgetting
 #
-# Fashion MNIST Dataset
-#
-# Permutation of input and output
+# Permuted MNIST Dataset
 #
 # Learning with context-dependent gating (random/adaptive)
 #
