@@ -14,7 +14,7 @@ import jax.scipy.special as jscisp
 from jax import grad, jit, vmap
 from jax import random
 
-from tlcf1_lst2_model import generate_tasks, calc_dW_ist, fnorm2, calc_error_ist
+from lst_model import generate_tasks, calc_dW_ist, fnorm2, calc_error_ist
 
 import matplotlib.pyplot as plt
 	
@@ -145,7 +145,6 @@ if __name__ == "__main__":
 	#simul_set1(params)
 	simul_set2(params)
 	#simul_set3(params)
-	#simul_set4(params)
 	
 		
 		
