@@ -1,7 +1,7 @@
 #
 # Model of tranfer learning and catastrophic forgetting
 #
-# puermuted MNIST Dataset
+# permuted MNIST Dataset
 #
 # Permutation of input and output
 #
