@@ -3,7 +3,7 @@
 #
 # Linear student-teacher model
 #
-# Vanilla model
+# Adaptive context-dependent gating model
 #
 
 import sys
