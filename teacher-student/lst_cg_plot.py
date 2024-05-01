@@ -3,7 +3,7 @@
 #
 # Linear student-teacher model
 #
-# Vanilla model
+# Context-dependent gating: Plotting
 #
 
 import sys
@@ -21,7 +21,6 @@ clrs = []
 cnum = 6
 for cidx in range(cnum):
 	clrs.append( cm.viridis( (0.5+cidx)/cnum ) )
-
 
 
 def calc_eTF_eRT_cg_mf(params):
