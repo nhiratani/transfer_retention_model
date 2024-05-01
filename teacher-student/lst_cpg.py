@@ -15,7 +15,7 @@ import jax.numpy as jnp
 from jax import grad, jit, vmap
 from jax import random
 
-from tlcf1_lst2_model import generate_tasks, calc_dW_cpg, fnorm2, generate_g
+from lst_model import generate_tasks, calc_dW_cpg, fnorm2, generate_g
 
 import matplotlib.pyplot as plt
 
