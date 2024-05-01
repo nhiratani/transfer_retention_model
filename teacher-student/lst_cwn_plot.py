@@ -3,7 +3,7 @@
 #
 # Linear student-teacher model
 #
-# Vanilla model
+# Weight regularization in the Fisher information metric" Plotting
 #
 
 import sys
@@ -316,108 +316,6 @@ def plot_simul_set3(params):
 					+ '_nep' + str(params['num_epochs']) + "_ikm" + str(params['ikmax']) + ".pdf")
 		
 
-def plot_simul_set4(params):
-	rhoAs = [0.3, 0.6, 0.9]
-	rhoBs = [0.3, 0.6, 0.9]
-	gms = [0.2, 0.4, 0.6, 0.8, 1.0]
-	
-	gmlen = len(gms)
-	ralen = len(rhoAs)
-	rblen = len(rhoBs)
-	
-	num_epochs = params['num_epochs']
-	ikmax = params['ikmax'] 
-	
-	eTFs = np.zeros((gmlen, ralen, rblen, ikmax))
-	eRTs = np.zeros((gmlen, ralen, rblen, ikmax))
-	
-	eTF_means = np.zeros((gmlen, ralen, rblen)); eTF_stds = np.zeros((gmlen, ralen, rblen))
-	eRT_means = np.zeros((gmlen, ralen, rblen)); eRT_stds = np.zeros((gmlen, ralen, rblen))
-
-	for raidx in range(ralen):
-		params['rhoA'] = rhoAs[raidx]
-		for rbidx in range(rblen):
-			params['rhoB'] = rhoBs[rbidx]
-		
-			for gmidx in range(gmlen):
-				params['gm'] = gms[gmidx]
-				
-				fstr = 'data/tlcf1_lst2_wn_errors_Nx' + str(params['Nx']) + '_lr' + str(params['learning_rate'])\
-				+ '_nep' + str(params['num_epochs']) + '_rhoA' + str(params['rhoA']) + '_rhoB' + str(params['rhoB']) + '_gm' + str(params['gm'])+ '_ikm' + str(params['ikmax']) + ".txt"
-
-				lidx = 0
-				for line in open(fstr, 'r'):
-					ltmps = line[:-1].split(" ")
-					eTFs[gmidx, raidx, rbidx, lidx] = 1.0 - float( ltmps[2] )
-					eRTs[gmidx, raidx, rbidx, lidx] = 1.0 - float( ltmps[3] )
-					lidx += 1
-				
-				eTF_means[gmidx, raidx, rbidx] = np.mean(eTFs[gmidx, raidx, rbidx, :])
-				eTF_stds[gmidx, raidx, rbidx] = np.std(eTFs[gmidx, raidx, rbidx, :])
-				
-				eRT_means[gmidx, raidx, rbidx] = np.mean(eRTs[gmidx, raidx, rbidx, :])
-				eRT_stds[gmidx, raidx, rbidx] = np.std(eRTs[gmidx, raidx, rbidx, :])
-			
-	
-	gm_mfs = np.arange(0.01, 1.005, 0.01)
-	gmflen = len(gm_mfs)
-	eTF_mfs = np.zeros((gmflen, ralen, rblen))
-	eRT_mfs = np.zeros((gmflen, ralen, rblen))
-	
-	for raidx in range(ralen):
-		params['rhoA'] = rhoAs[raidx]
-		for rbidx in range(rblen):
-			params['rhoB'] = rhoBs[rbidx]
-			for gmfidx in range(gmflen):
-				params['gm'] = gm_mfs[gmfidx]
-				eTFtmp, eRTtmp = calc_eTF_eRT_wn_mf(params)
-				eTF_mfs[gmfidx, raidx, rbidx] = eTFtmp
-				eRT_mfs[gmfidx, raidx, rbidx] = eRTtmp
-	
-	plt.style.use("ggplot")
-	plt.rcParams.update({'font.size':16})
-	#svfg1 = plt.figure()
-	
-	for raidx in range(ralen):
-		for rbidx in range(rblen):
-			fig, axs = plt.subplots(1, 1, sharex=True, sharey=True)
-			
-			points = np.array([eTF_mfs[:, raidx, rbidx], eRT_mfs[:, raidx, rbidx]]).T.reshape(-1, 1, 2)
-			segments = np.concatenate([points[:-1], points[1:]], axis=1)
-			norm = plt.Normalize(gm_mfs.min(), gm_mfs.max())
-
-			lc = LineCollection(segments, cmap='rainbow', norm=norm)
-			lc.set_array(gm_mfs)
-			lc.set_linewidth(2)
-			line = axs.add_collection(lc)
-			
-			climit = 5
-			clrs = []
-			for q in range(climit):
-				clrs.append( cm.rainbow( gms[q] ) )
-			for gmidx in range(gmlen):
-				axs.errorbar(eTF_means[gmidx, raidx, rbidx], eRT_means[gmidx, raidx, rbidx], xerr=eTF_stds[gmidx, raidx, rbidx], yerr=eRT_stds[gmidx, raidx, rbidx],\
-				color=clrs[gmidx], lw=0.0, elinewidth=2.0, capthick=2.0, capsize=4.0, marker='o', markersize=7.5)
-			
-			axs.set_xlim(0.0, min(1.25*max(eTF_mfs[:,raidx,rbidx]), 1.0))
-			axs.set_ylim(0.0, min(1.25*max(eRT_mfs[:,raidx,rbidx]), 1.0))
-			"""
-			if min(eTF_mfs[ridx]) >= 0:
-				axs.set_xlim(0, 1.25*max(eTF_mfs[ridx]))
-			else:
-				axs.set_xlim(2.0*min(eTF_mfs[ridx]), 2.0*max(eTF_mfs[ridx]))
-			if min(eRT_mfs[ridx]) > 0.9:
-				axs.set_ylim( min(eRT_mfs[ridx])-0.03, 1.01)
-			else:
-				axs.set_ylim( 0.75*min(eRT_mfs[ridx]), 1.01)
-			"""
-			fig.colorbar(line)
-
-			plt.show()
-			fig.savefig("fig_tlcf1_lst2_wn_simul_set4_eTF_eRT_Nx" + str(params['Nx']) + "_rhoA" + str(rhoAs[raidx]) + "_rhoB" + str(rhoBs[rbidx]) + "_ikm" + str(params['ikmax']) + ".pdf")
-			
-
-
 if __name__ == "__main__":
 	stdins = sys.argv # standard inputs
 
@@ -437,5 +335,4 @@ if __name__ == "__main__":
 	#plot_simul_set1(params)
 	#plot_simul_set2(params)
 	plot_simul_set3(params)
-	#plot_simul_set4(params)
 		
