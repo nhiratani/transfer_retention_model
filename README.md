@@ -1,4 +1,4 @@
-# Disentangling and mitigating the impact of task similarity for  continual learning
+# An analytically tractable model of knowledge transfer and retention
 ## Teacher-student models
 - vanilla : Vanilla model (Fig. 1)
 - cg: Context-dependent activity gating model (Fig. 2)
