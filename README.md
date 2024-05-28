@@ -10,6 +10,6 @@
 - cwn_diag: Weight regularization in the Fisher information metric with diagonal approximation (Fig. 5)
 
 ## Nonlinear Deep Neural Network models
-- vanilla: Vanilla model
-- gated: Context-dependent activity gating models
-- wr: Weight regularization models
+- vanilla: Vanilla model (Fig. 6)
+- gated: Context-dependent activity gating models (Fig. 6)
+- wr: Weight regularization models (Fig. 6)
